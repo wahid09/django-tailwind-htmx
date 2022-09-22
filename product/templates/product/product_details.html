@@ -3,7 +3,7 @@
 
 <div class="max-w-6xl mx-auto flex flex-wrap py-6 px-6 xl:px-0">
     <div class="images w-full mb-6 lg:mb-0 lg:w-3/5">
-        <img class="rounded-xl" src="">
+        <img class="rounded-xl" src="{{ product.image.url }}">
     </div>
     <div class="information w-full lg:w-2/5 lg:p-6">
         <h1 class="text-2xl">{{ product.name }}</h1>
@@ -12,7 +12,12 @@
             <p class="mt-6 text-gray-700">{{ product.description }}</p>
         {% endif %}
 
-        <a href="" class="mt-6 inline-block px-8 py-4 rounded-xl bg-purple-500 text-white">
+        <a href="#"
+           class="mt-6 inline-block px-8 py-4 rounded-xl bg-purple-500 text-white"
+           hx-get="{% url 'App_cart:add_to_cart' product.id %}"
+           hx-target="#menu-cart-button"
+           hx-swap="outerHTML"
+        >
             Add to card
         </a>
     </div>
