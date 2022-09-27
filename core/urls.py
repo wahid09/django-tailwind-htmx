@@ -26,8 +26,9 @@ urlpatterns = [
     path('delete-todo/<int:pk>/', delete_todo, name='delete_todo'),
     path('admin/', admin.site.urls),
     path('shop/', include('shop.urls')),
-    path('products', include('product.urls')),
-    path('cart', include('cart.urls')),
+    path('products/', include('product.urls')),
+    path('cart/', include('cart.urls')),
     path('account/', include('account.urls')),
     path('movie/', include('movie.urls')),
+    path('cms/', include('cms.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
