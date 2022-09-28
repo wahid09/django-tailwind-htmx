@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 
 def cms_home(request):
-    return render(request, 'cms/index.html')
+    return render(request, 'cms/home.html')
 
 
 def add_cart(request):
