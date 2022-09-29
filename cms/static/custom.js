@@ -1,6 +1,4 @@
-<script>
-    </script>
-    <script>
+
     $(document).ready(function() {
         $('.category-nav-element').each(function(i, el) {
             $(el).on('mouseover', function() {
@@ -508,4 +506,71 @@
             AIZ.plugins.slickCarousel();
         });
     });
-    </script>
+
+    // making the CAPTCHA  a required field for form submission
+        $(document).ready(function(){
+            // alert('helloman');
+            $("#reg-form").on("submit", function(evt)
+            {
+                var response = grecaptcha.getResponse();
+                if(response.length == 0)
+                {
+                //reCaptcha not verified
+                    alert("please verify you are humann!");
+                    evt.preventDefault();
+                    return false;
+                }
+                //captcha verified
+                //do the rest of your validations here
+                $("#reg-form").submit();
+            });
+        });
+
+        var isPhoneShown = true,
+            countryData = window.intlTelInputGlobals.getCountryData(),
+            input = document.querySelector("#phone-code");
+
+        for (var i = 0; i < countryData.length; i++) {
+            var country = countryData[i];
+            if(country.iso2 == 'bd'){
+                country.dialCode = '88';
+            }
+        }
+
+        var iti = intlTelInput(input, {
+            separateDialCode: true,
+            utilsScript: "https://demo.activeitzone.com/ecommerce/public/assets/js/intlTelutils.js?1590403638580",
+            onlyCountries: ["AF","AL","DZ","AS","AD","AO","AI","AQ","AG","AR","AM","AW","AU","AT","AZ","BS","BH","BD","BB","BY","BE","BZ","BJ","BM","BT","BO","BA","BW","BV","BR","IO","BN","BG","BF","BI","KH","CM","CA","CV","KY","CF","TD","CL","CN","CX","CC","CO","KM","CG","CD","CK","CR","CI","HR","CU","CY","CZ","DK","DJ","DM","DO","TP","EC","EG","SV","GQ","ER","EE","ET","XA","FK","FO","FJ","FI","FR","GF","PF","TF","GA","GM","GE","DE","GH","GI","GR","GL","GD","GP","GU","GT","XU","GN","GW","GY","HT","HM","HN","HK","HU","IS","IN","ID","IR","IQ","IE","IL","IT","JM","JP","XJ","JO","KZ","KE","KI","KP","KR","KW","KG","LA","LV","LB","LS","LR","LY","LI","LT","LU","MO","MK","MG","MW","MY","MV","ML","MT","XM","MH","MQ","MR","MU","YT","MX","FM","MD","MC","MN","MS","MA","MZ","MM","NA","NR","NP","AN","NL","NC","NZ","NI","NE","NG","NU","NF","MP","NO","OM","PK","PW","PS","PA","PG","PY","PE","PH","PN","PL","PT","PR","QA","RE","RO","RU","RW","SH","KN","LC","PM","VC","WS","SM","ST","SA","SN","RS","SC","SL","SG","SK","SI","XG","SB","SO","ZA","GS","SS","ES","LK","SD","SR","SJ","SZ","SE","CH","SY","TW","TJ","TZ","TH","TG","TK","TO","TT","TN","TR","TM","TC","TV","UG","UA","AE","GB","US","UM","UY","UZ","VU","VA","VE","VN","VG","VI","WF","EH","YE","YU","ZM","ZW"],
+            customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
+                if(selectedCountryData.iso2 == 'bd'){
+                    return "01xxxxxxxxx";
+                }
+                return selectedCountryPlaceholder;
+            }
+        });
+
+        var country = iti.getSelectedCountryData();
+        $('input[name=country_code]').val(country.dialCode);
+
+        input.addEventListener("countrychange", function(e) {
+            // var currentMask = e.currentTarget.placeholder;
+
+            var country = iti.getSelectedCountryData();
+            $('input[name=country_code]').val(country.dialCode);
+
+        });
+
+        function toggleEmailPhone(el){
+            if(isPhoneShown){
+                $('.phone-form-group').addClass('d-none');
+                $('.email-form-group').removeClass('d-none');
+                isPhoneShown = false;
+                $(el).html('Use Phone Instead');
+            }
+            else{
+                $('.phone-form-group').removeClass('d-none');
+                $('.email-form-group').addClass('d-none');
+                isPhoneShown = true;
+                $(el).html('Use Email Instead');
+            }
+        }

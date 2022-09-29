@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'account',
     'movie',
     'cms',
+    'user_account',
 ]
 
 MIDDLEWARE = [

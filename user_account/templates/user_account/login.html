@@ -1,0 +1,146 @@
+{% extends "cms/index.html" %}
+{% block content %}
+<section class="gry-bg py-5">
+    <div class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-8 mx-auto">
+                    <div class="card">
+                        <div class="text-center pt-4">
+                            <h1 class="h4 fw-600">
+                                Login to your account.
+                            </h1>
+                        </div>
+
+                        <div class="px-4 py-3 py-lg-4">
+                            <div class="">
+                                <form class="form-default" role="form"
+                                      action="https://demo.activeitzone.com/ecommerce/login" method="POST">
+                                    <input type="hidden" name="_token" value="60emtilZGzBPDGf5483EVzvKtebycelWLbym4p8H">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" value="" placeholder="Email"
+                                               name="email" id="email" autocomplete="off">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" class="form-control " placeholder="Password"
+                                               name="password" id="password">
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <label class="aiz-checkbox">
+                                                <input type="checkbox" name="remember">
+                                                <span class=opacity-60>Remember Me</span>
+                                                <span class="aiz-square-check"></span>
+                                            </label>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <a href="../password/reset.html" class="text-reset opacity-60 fs-14">Forgot
+                                                password?</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-5">
+                                        <button type="submit" class="btn btn-primary btn-block fw-600">Login</button>
+                                    </div>
+                                </form>
+
+                                <div class="mb-5">
+                                    <table class="table table-bordered mb-0">
+                                        <tbody>
+                                        <tr>
+                                            <td>Seller Account</td>
+                                            <td>
+                                                <button class="btn btn-info btn-sm" onclick="autoFillSeller()">Copy
+                                                    credentials
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customer Account</td>
+                                            <td>
+                                                <button class="btn btn-info btn-sm" onclick="autoFillCustomer()">Copy
+                                                    credentials
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Delivery Boy Account</td>
+                                            <td>
+                                                <button class="btn btn-info btn-sm" onclick="autoFillDeliveryBoy()">Copy
+                                                    credentials
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="text-center">
+                                <p class="text-muted mb-0">Dont have an account?</p>
+                                <a href="{% url 'App_user_account:user_register' %}">Register Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+
+                // making the CAPTCHA  a required field for form submission
+        var isPhoneShown = true,
+            countryData = window.intlTelInputGlobals.getCountryData(),
+            input = document.querySelector("#phone-code");
+
+        for (var i = 0; i < countryData.length; i++) {
+            var country = countryData[i];
+            if(country.iso2 == 'bd'){
+                country.dialCode = '88';
+            }
+        }
+
+        var iti = intlTelInput(input, {
+            separateDialCode: true,
+            utilsScript: "https://demo.activeitzone.com/ecommerce/public/assets/js/intlTelutils.js?1590403638580",
+            onlyCountries: ["AF","AL","DZ","AS","AD","AO","AI","AQ","AG","AR","AM","AW","AU","AT","AZ","BS","BH","BD","BB","BY","BE","BZ","BJ","BM","BT","BO","BA","BW","BV","BR","IO","BN","BG","BF","BI","KH","CM","CA","CV","KY","CF","TD","CL","CN","CX","CC","CO","KM","CG","CD","CK","CR","CI","HR","CU","CY","CZ","DK","DJ","DM","DO","TP","EC","EG","SV","GQ","ER","EE","ET","XA","FK","FO","FJ","FI","FR","GF","PF","TF","GA","GM","GE","DE","GH","GI","GR","GL","GD","GP","GU","GT","XU","GN","GW","GY","HT","HM","HN","HK","HU","IS","IN","ID","IR","IQ","IE","IL","IT","JM","JP","XJ","JO","KZ","KE","KI","KP","KR","KW","KG","LA","LV","LB","LS","LR","LY","LI","LT","LU","MO","MK","MG","MW","MY","MV","ML","MT","XM","MH","MQ","MR","MU","YT","MX","FM","MD","MC","MN","MS","MA","MZ","MM","NA","NR","NP","AN","NL","NC","NZ","NI","NE","NG","NU","NF","MP","NO","OM","PK","PW","PS","PA","PG","PY","PE","PH","PN","PL","PT","PR","QA","RE","RO","RU","RW","SH","KN","LC","PM","VC","WS","SM","ST","SA","SN","RS","SC","SL","SG","SK","SI","XG","SB","SO","ZA","GS","SS","ES","LK","SD","SR","SJ","SZ","SE","CH","SY","TW","TJ","TZ","TH","TG","TK","TO","TT","TN","TR","TM","TC","TV","UG","UA","AE","GB","US","UM","UY","UZ","VU","VA","VE","VN","VG","VI","WF","EH","YE","YU","ZM","ZW"],
+            customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
+                if(selectedCountryData.iso2 == 'bd'){
+                    return "01xxxxxxxxx";
+                }
+                return selectedCountryPlaceholder;
+            }
+        });
+
+        var country = iti.getSelectedCountryData();
+        $('input[name=country_code]').val(country.dialCode);
+
+        input.addEventListener("countrychange", function(e) {
+            // var currentMask = e.currentTarget.placeholder;
+
+            var country = iti.getSelectedCountryData();
+            $('input[name=country_code]').val(country.dialCode);
+
+        });
+
+        function toggleEmailPhone(el){
+            if(isPhoneShown){
+                $('.phone-form-group').addClass('d-none');
+                $('.email-form-group').removeClass('d-none');
+                isPhoneShown = false;
+                $(el).html('Use Phone Instead');
+            }
+            else{
+                $('.phone-form-group').removeClass('d-none');
+                $('.email-form-group').addClass('d-none');
+                isPhoneShown = true;
+                $(el).html('Use Email Instead');
+            }
+        }
+
+</script>
+{% endblock %}
